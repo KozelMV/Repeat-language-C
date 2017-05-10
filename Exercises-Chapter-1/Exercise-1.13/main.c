@@ -1,8 +1,11 @@
 #include <stdio.h>
+#define true 1
+#define false 0
 #define MAxCHARS 50	//4'096 max chars in cmd
 #define MAxWORDS 8192
 main() {
 char ch;
+int lenWords[MAxWORDS];
 char words[MAxWORDS][MAxCHARS];
 int countChar, counWord, biggestWord, sign;
 countChar = counWord = biggestWord = sign = 0;
@@ -11,6 +14,7 @@ countChar = counWord = biggestWord = sign = 0;
 			if(countChar == 0) { /*Inactivity with two or more punctuation marks*/ }
 			else {
 				sign = 1;
+				lenWords[counWord] = countChar;
 				words[counWord][countChar] = '\0';
 				counWord++;
 				if(countChar > biggestWord) {
@@ -22,10 +26,31 @@ countChar = counWord = biggestWord = sign = 0;
 		else {
 			sign = 0;
 			words[counWord][countChar] = ch;
-			countChar++;	
+			countChar++;
+			
 		}
 	}
-	//Words output on display.
+	//Vertical histogram output
+int copBiggestWord = biggestWord;
+	for(int w = 0; w < biggestWord; w++) {
+		for(int i = 0; i < counWord; i++) {
+			if(lenWords[i] < copBiggestWord) {
+				printf("%c", ' ');
+			}
+			else {
+				printf("%c", '|');
+			}
+		}
+	copBiggestWord--;
+	printf("\n");
+	}
+	for(int i = 0;i < counWord ; i++) {
+			printf("%c", '-');
+	}
+	printf("\n");
+	//End vertical output
+//////////////////////////////////////////////////////////////////////
+	//Words of horizontal output on display.
 	for( int i = 0, q; i < counWord; i++) {
 		q = 0;
 		if (i <= 8) //Alignment of output
@@ -56,6 +81,7 @@ countChar = counWord = biggestWord = sign = 0;
 		printf("%c", '\n');
 	}
 	//End of horizontal histogram output
+//////////////////////////////////////////////////////////////////////
 	for(int i = 0;i <= biggestWord*2+8 ; i++) {
 			printf("%c", '_');
 		}
