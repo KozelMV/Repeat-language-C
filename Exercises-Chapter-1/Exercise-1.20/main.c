@@ -1,5 +1,5 @@
 #include <stdio.h>
-#define TAB 3
+#define TAB 3 //число символов до стопа
 #define MAXLINE 1000
 
 char ch;
@@ -7,48 +7,38 @@ char string[MAXLINE];
 int countIn = TAB;
 int countOut = TAB;
 
-
 int main()
 {
 	while((ch = getchar()) != EOF)
 	{
-		string[countIn++] = ch;
-		
+		string[countIn++] = ch;	
 	}
 	printf("%s\n", "\t\t\t\t-----------------------");
 	while(countOut <= countIn)
 	{
 		ch = string[countOut];
-		//сравниваем символ с первым символом табул¤ции
-		//провер¤ем не выйдем ли за массив при прасмотре второго символа
 		if(ch == '\\' && countOut + 1 <= countIn)
 		{
-			char tempCh;
-			tempCh = string[countOut++];
-			if(tempCh == 't')
+			++countOut;
+			ch = string[countOut];
+			if(ch == 't')
 			{
-				/*x=любое число*/
-				/*i=TAB-x%TAB*//*получим i=3... i=2. i=1..*/
-				/* написать на основе этого цикл*/
-				for(int i=TAB-countOut%TAB; i > 0; i--)
-				{
-					printf("%c", '.');
+				for(int i=TAB-(countOut-1)%TAB,q=TAB-i; q < TAB; q++)
+				{ /*i=TAB-x%TAB*//*получим i=3... i=2. i=1..*/
+					printf("%c", '.'); 
 				}
-				countOut+=2;
+				countOut++;
 			}
 			else
 			{
-				printf("%c", ch);
-				countOut++;
+				printf("%c", ch);	
 			}
 		}
 		else
 		{
 			printf("%c", ch);
 			countOut++;
-		}
-		
+		}	
 	}
-	
 	return 0;
 }
