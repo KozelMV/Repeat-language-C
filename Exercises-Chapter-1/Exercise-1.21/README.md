@@ -1,0 +1,4 @@
+Упражнение 1.21. 
+Напишите программу entab, заменяющую строки из пробелов минимальным числом табуляций и пробелов таким образом, чтобы вид напечатанного текста не изменился. Используйте те же "стопы" табуляции, что и в detab. В случае, когда для выхода на очередной "стоп" годится один пробел, что лучше — пробел или табуляция?
+
+Write a program to ``fold'' long input lines into two or more shorter lines after the last non-blank character that occurs before the n-th column of input. Make sure your program does something intelligent with very long lines, and if there are no blanks or tabs before the specified column.
